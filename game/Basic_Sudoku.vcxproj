@@ -270,10 +270,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameScene.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\singleton\Application.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameScene.hpp" />
+    <ClInclude Include="src\Scene.hpp" />
     <ClInclude Include="src\singleton\Application.hpp" />
     <ClInclude Include="src\singleton\SingletonTemplate.hpp" />
   </ItemGroup>

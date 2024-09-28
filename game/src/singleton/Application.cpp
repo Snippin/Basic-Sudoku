@@ -1,4 +1,5 @@
 #include "Application.hpp"
+#include "GameScene.hpp"
 #include "raylib.h"
 
 void Application::Initialise()
@@ -14,11 +15,13 @@ void Application::Initialise()
 
     // initialise variables
     exit_app = false;
-    font = LoadFont("resources/mecha.png");
 }
 
 void Application::Run()
 {
+    scene = new GameScene();
+    scene->Enter();
+
     while (!WindowShouldClose() && !exit_app)
     {
         Update();
@@ -28,7 +31,12 @@ void Application::Run()
 
 void Application::Exit()
 {
-    UnloadFont(font);
+    if (scene != NULL)
+    {
+        scene->Exit();
+        delete scene;
+    }
+
     CloseAudioDevice();
     CloseWindow();
 }
@@ -45,21 +53,13 @@ int Application::GetScreenHeight() const
 
 void Application::Update()
 {
+    scene->Update();
 }
 
 void Application::Render()
 {
     BeginDrawing();
     ClearBackground(BLACK);
-
-    float fontSize = font.baseSize * 3.0f;
-    const char *text = "TEST";
-    float textSpacing = 5.f;
-    Vector2 textSize = MeasureTextEx(font, text, fontSize, textSpacing);
-    DrawTextEx(font, text,
-        { (screen_width * 0.5f) - (textSize.x * 0.5f),
-        (screen_height * 0.5f) - (textSize.y * 0.5f) },
-        fontSize, textSpacing, WHITE);
-
+    scene->Render();
     EndDrawing();
 }

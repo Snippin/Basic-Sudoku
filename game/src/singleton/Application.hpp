@@ -1,7 +1,8 @@
 #pragma once
 
 #include "SingletonTemplate.hpp"
-#include "raylib.h"
+
+class Scene;
 
 class Application : public Singleton<Application>
 {
@@ -22,6 +23,5 @@ private:
     int screen_width;
     int screen_height;
     bool exit_app;
-
-    Font font;
+    Scene *scene;
 };
