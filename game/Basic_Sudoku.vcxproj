@@ -265,20 +265,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\screens.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\raylib-master\raylib.vcxproj">
       <Project>{8898EA18-743A-15EF-5DF5-284349369C3F}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\raylib_game.cpp" />
-    <ClCompile Include="src\screen_ending.cpp" />
-    <ClCompile Include="src\screen_gameplay.cpp" />
-    <ClCompile Include="src\screen_logo.cpp" />
-    <ClCompile Include="src\screen_options.cpp" />
-    <ClCompile Include="src\screen_title.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
