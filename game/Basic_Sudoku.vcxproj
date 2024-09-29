@@ -273,11 +273,13 @@
     <ClCompile Include="src\GameScene.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\singleton\Application.cpp" />
+    <ClCompile Include="src\singleton\ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameScene.hpp" />
     <ClInclude Include="src\Scene.hpp" />
     <ClInclude Include="src\singleton\Application.hpp" />
+    <ClInclude Include="src\singleton\ResourceManager.hpp" />
     <ClInclude Include="src\singleton\SingletonTemplate.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

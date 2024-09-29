@@ -1,8 +1,15 @@
 #include "GameScene.hpp"
 #include "singleton/Application.hpp"
+#include "singleton/ResourceManager.hpp"
+
 #include "raylib.h"
 
-GameScene::GameScene() : timer{ 0 }, font{ 0 }
+namespace
+{
+    ResourceManager *resource_manager = ResourceManager::Get();
+}
+
+GameScene::GameScene() : timer{ 0 }
 {
 
 }
@@ -14,15 +21,17 @@ GameScene::~GameScene()
 
 void GameScene::Enter()
 {
-    font = LoadFont("resources/mecha.png");
+
 }
 
 void GameScene::Update()
 {
+
 }
 
 void GameScene::Render()
 {
+    Font font = resource_manager->GetFont();
     int screen_width = Application::Get()->GetScreenWidth();
     int screen_height = Application::Get()->GetScreenHeight();
 
@@ -38,5 +47,5 @@ void GameScene::Render()
 
 void GameScene::Exit()
 {
-    UnloadFont(font);
+
 }

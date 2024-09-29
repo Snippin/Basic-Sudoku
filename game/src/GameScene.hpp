@@ -16,5 +16,4 @@ public:
 
 private:
     float timer;
-    Font font;
 };

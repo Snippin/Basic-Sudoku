@@ -1,6 +1,13 @@
 #include "Application.hpp"
 #include "GameScene.hpp"
+#include "ResourceManager.hpp"
+
 #include "raylib.h"
+
+namespace
+{
+    ResourceManager *resource_manager = ResourceManager::Get();
+}
 
 void Application::Initialise()
 {
@@ -15,6 +22,8 @@ void Application::Initialise()
 
     // initialise variables
     exit_app = false;
+
+    resource_manager->LoadResources();
 }
 
 void Application::Run()
@@ -36,6 +45,8 @@ void Application::Exit()
         scene->Exit();
         delete scene;
     }
+
+    resource_manager->UnloadResources();
 
     CloseAudioDevice();
     CloseWindow();
