@@ -8,7 +8,8 @@ namespace
     ResourceManager *resource_manager = ResourceManager::Get();
 }
 
-GameScene::GameScene() : timer{ 0 }
+GameScene::GameScene() :
+    timer{ 0 }, selected_x{ -1 }, selected_y{ -1 }
 {
 
 }
@@ -68,12 +69,37 @@ void GameScene::Render()
     {
         for (int y = 0; y < 9; y++)
         {
-            cells[y][x].Render();
+            Cell *cell = &cells[y][x];
+
+            if (cell->IsHovering() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+            {
+                SelectCell(x, y);
+            }
+
+            if (!cell->IsSelected())
+            {
+                cell->Render();
+            }
         }
     }
+
+    cells[selected_y][selected_x].Render();
 }
 
 void GameScene::Exit()
 {
 
+}
+
+void GameScene::SelectCell(int x, int y)
+{
+    if (selected_x >= 0)
+    {
+        cells[selected_y][selected_x].SetSelect(false);
+    }
+
+    cells[y][x].SetSelect(true);
+
+    selected_x = x;
+    selected_y = y;
 }

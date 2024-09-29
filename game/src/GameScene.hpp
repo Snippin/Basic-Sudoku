@@ -16,6 +16,10 @@ public:
     void Exit() override;
 
 private:
+    void SelectCell(int x, int y);
+
     float timer;
     Cell cells[9][9];
+    int selected_x;
+    int selected_y;
 };
