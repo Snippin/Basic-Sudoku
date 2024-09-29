@@ -270,12 +270,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Cell.cpp" />
     <ClCompile Include="src\GameScene.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\singleton\Application.cpp" />
     <ClCompile Include="src\singleton\ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Cell.hpp" />
     <ClInclude Include="src\GameScene.hpp" />
     <ClInclude Include="src\Scene.hpp" />
     <ClInclude Include="src\singleton\Application.hpp" />

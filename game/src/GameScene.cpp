@@ -20,7 +20,26 @@ GameScene::~GameScene()
 
 void GameScene::Enter()
 {
+    Vector2 boardTileSize = { 50, 50 };
+    Vector2 tileOffset = { 4, 4 };
+    Vector2 screenHalf = {
+        GetScreenWidth() * 0.5f - boardTileSize.x * 0.5f,
+        GetScreenHeight() * 0.5f - boardTileSize.y * 0.5f
+    };
 
+    for (int y = 0; y < 9; y++)
+    {
+        for (int x = 0; x < 9; x++)
+        {
+            float xpos = screenHalf.x +
+                ((x - tileOffset.x) * boardTileSize.x);
+            float ypos = screenHalf.y +
+                ((y - tileOffset.y) * boardTileSize.y);
+
+            cells[y][x].
+                SetRectangle({ xpos, ypos, boardTileSize.x, boardTileSize.y });
+        }
+    }
 }
 
 void GameScene::Update()
@@ -43,6 +62,15 @@ void GameScene::Render()
     Vector2 textPos =
     { screen_width * 0.5f - (text_size.x * 0.5f), font_size * 0.5f };
     DrawTextEx(font, text, textPos, font_size, text_spacing, WHITE);
+
+    // render board
+    for (int x = 0; x < 9; x++)
+    {
+        for (int y = 0; y < 9; y++)
+        {
+            cells[y][x].Render();
+        }
+    }
 }
 
 void GameScene::Exit()

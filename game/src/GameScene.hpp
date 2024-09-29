@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Scene.hpp"
+#include "Cell.hpp"
 #include "raylib.h"
 
 class GameScene : public Scene
@@ -16,4 +17,5 @@ public:
 
 private:
     float timer;
+    Cell cells[9][9];
 };
