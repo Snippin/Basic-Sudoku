@@ -1,5 +1,4 @@
 #include "GameScene.hpp"
-#include "singleton/Application.hpp"
 #include "singleton/ResourceManager.hpp"
 
 #include "raylib.h"
@@ -26,23 +25,24 @@ void GameScene::Enter()
 
 void GameScene::Update()
 {
-
+    timer += GetFrameTime();
 }
 
 void GameScene::Render()
 {
+    int screen_width = GetScreenWidth();
+    int screen_height = GetScreenHeight();
     Font font = resource_manager->GetFont();
-    int screen_width = Application::Get()->GetScreenWidth();
-    int screen_height = Application::Get()->GetScreenHeight();
+    float font_size = font.baseSize * 3.f;
+    float text_spacing = 4.f;
 
-    float fontSize = font.baseSize * 3.0f;
-    const char *text = "TEST";
-    float textSpacing = 5.f;
-    Vector2 textSize = MeasureTextEx(font, text, fontSize, textSpacing);
-    DrawTextEx(font, text,
-        { (screen_width * 0.5f) - (textSize.x * 0.5f),
-        (screen_height * 0.5f) - (textSize.y * 0.5f) },
-        fontSize, textSpacing, WHITE);
+    // timer
+    const char *text =
+        TextFormat("%02d:%02d", (int)timer / 60, (int)timer % 60);
+    Vector2 text_size = MeasureTextEx(font, text, font_size, text_spacing);
+    Vector2 textPos =
+    { screen_width * 0.5f - (text_size.x * 0.5f), font_size * 0.5f };
+    DrawTextEx(font, text, textPos, font_size, text_spacing, WHITE);
 }
 
 void GameScene::Exit()

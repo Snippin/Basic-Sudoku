@@ -9,7 +9,7 @@ class ResourceManager : public Singleton<ResourceManager>
 
 public:
     void LoadResources();
-    void UnloadResources();
+    void UnloadResources() const;
 
     Font GetFont() const;
 

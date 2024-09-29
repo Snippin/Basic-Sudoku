@@ -7,7 +7,7 @@ void ResourceManager::LoadResources()
     font = LoadFont(FONT("pixel_play.png"));
 }
 
-void ResourceManager::UnloadResources()
+void ResourceManager::UnloadResources() const
 {
     UnloadFont(font);
 }
