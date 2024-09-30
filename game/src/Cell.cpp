@@ -1,5 +1,8 @@
 #include "Cell.hpp"
 
+#include "singleton/ResourceManager.hpp"
+
+#include <string>
 
 Cell::Cell() : rectangle{}, is_selected{}
 {

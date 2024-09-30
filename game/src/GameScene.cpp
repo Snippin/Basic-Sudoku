@@ -1,4 +1,5 @@
 #include "GameScene.hpp"
+
 #include "raylib.h"
 #include "singleton/ResourceManager.hpp"
 
@@ -23,6 +24,7 @@ void GameScene::Enter()
 {
     srand(time(NULL));
 
+    // initialise board position
     Vector2 boardTileSize = { 50, 50 };
     Vector2 tileOffset = { 4, 4 };
     Vector2 screenHalf = {

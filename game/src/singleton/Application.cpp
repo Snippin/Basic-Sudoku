@@ -1,4 +1,5 @@
 #include "Application.hpp"
+
 #include "GameScene.hpp"
 #include "ResourceManager.hpp"
 
