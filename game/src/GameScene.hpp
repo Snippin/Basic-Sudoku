@@ -2,7 +2,7 @@
 
 #include "Scene.hpp"
 #include "Cell.hpp"
-#include "raylib.h"
+#include "SudokuGenerator.hpp"
 
 class GameScene : public Scene
 {
@@ -17,6 +17,11 @@ public:
 
 private:
     void SelectCell(int x, int y);
+
+    SudokuGenerator generator;
+    int display_grid[9][9];
+    int solution_grid[9][9];
+
 
     float timer;
     Cell cells[9][9];

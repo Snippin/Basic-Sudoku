@@ -4,11 +4,6 @@
 
 #include "raylib.h"
 
-namespace
-{
-    ResourceManager *resource_manager = ResourceManager::Get();
-}
-
 void Application::Initialise()
 {
     screen_width = 1000;
@@ -23,7 +18,7 @@ void Application::Initialise()
     // initialise variables
     exit_app = false;
 
-    resource_manager->LoadResources();
+    ResourceManager::Get()->LoadResources();
 }
 
 void Application::Run()
@@ -46,7 +41,7 @@ void Application::Exit()
         delete scene;
     }
 
-    resource_manager->UnloadResources();
+    ResourceManager::Get()->UnloadResources();
 
     CloseAudioDevice();
     CloseWindow();

@@ -1,12 +1,12 @@
 #include "GameScene.hpp"
+#include "raylib.h"
 #include "singleton/ResourceManager.hpp"
 
-#include "raylib.h"
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
 
-namespace
-{
-    ResourceManager *resource_manager = ResourceManager::Get();
-}
+#define DEBUG 1
 
 GameScene::GameScene() :
     timer{ 0 }, selected_x{ -1 }, selected_y{ -1 }
@@ -21,6 +21,8 @@ GameScene::~GameScene()
 
 void GameScene::Enter()
 {
+    srand(time(NULL));
+
     Vector2 boardTileSize = { 50, 50 };
     Vector2 tileOffset = { 4, 4 };
     Vector2 screenHalf = {
@@ -41,6 +43,40 @@ void GameScene::Enter()
                 SetRectangle({ xpos, ypos, boardTileSize.x, boardTileSize.y });
         }
     }
+
+    generator.GeneratePuzzle(display_grid, solution_grid);
+
+#if DEBUG
+    printf("\nGRID\n");
+    for (int i = 0; i < 9; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            if (display_grid[i][j] == 0)
+                printf(".");
+            else
+                printf("%d", display_grid[i][j]);
+
+            printf("|");
+        }
+        printf("\n");
+    }
+
+    printf("\SOLN\n");
+    for (int i = 0; i < 9; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            if (solution_grid[i][j] == 0)
+                printf(".");
+            else
+                printf("%d", solution_grid[i][j]);
+
+            printf("|");
+        }
+        printf("\n");
+    }
+#endif
 }
 
 void GameScene::Update()
@@ -52,7 +88,7 @@ void GameScene::Render()
 {
     int screen_width = GetScreenWidth();
     int screen_height = GetScreenHeight();
-    Font font = resource_manager->GetFont();
+    Font font = ResourceManager::Get()->GetFont();
     float font_size = font.baseSize * 3.f;
     float text_spacing = 4.f;
 
