@@ -23,29 +23,7 @@ GameScene::~GameScene()
 void GameScene::Enter()
 {
     srand(time(NULL));
-
-    // initialise board position
-    Vector2 boardTileSize = { 50, 50 };
-    Vector2 tileOffset = { 4, 4 };
-    Vector2 screenHalf = {
-        GetScreenWidth() * 0.5f - boardTileSize.x * 0.5f,
-        GetScreenHeight() * 0.5f - boardTileSize.y * 0.5f
-    };
-
-    for (int y = 0; y < 9; y++)
-    {
-        for (int x = 0; x < 9; x++)
-        {
-            float xpos = screenHalf.x +
-                ((x - tileOffset.x) * boardTileSize.x);
-            float ypos = screenHalf.y +
-                ((y - tileOffset.y) * boardTileSize.y);
-
-            cells[y][x].
-                SetRectangle({ xpos, ypos, boardTileSize.x, boardTileSize.y });
-        }
-    }
-
+    InitialiseGridPositions();
     StartGame();
 }
 
@@ -70,7 +48,7 @@ void GameScene::Render()
     { screen_width * 0.5f - (text_size.x * 0.5f), font_size * 0.5f };
     DrawTextEx(font, text, textPos, font_size, text_spacing, WHITE);
 
-    // render board
+    // render cells
     for (int x = 0; x < 9; x++)
     {
         for (int y = 0; y < 9; y++)
@@ -89,6 +67,12 @@ void GameScene::Render()
         }
     }
 
+    // render 3x3 regions
+    for (int i = 0; i < 9; i++)
+    {
+        DrawRectangleLinesEx(regions[i], 2.5f, GRAY);
+    }
+
     if (selected_x >= 0)
     {
         cells[selected_y][selected_x].Render();
@@ -98,6 +82,46 @@ void GameScene::Render()
 void GameScene::Exit()
 {
 
+}
+
+void GameScene::InitialiseGridPositions()
+{
+    // initialise 9x9 cell positions
+    Vector2 boardTileSize = { 50, 50 };
+    Vector2 tileOffset = { 4, 4 };
+    Vector2 screenHalf = {
+        GetScreenWidth() * 0.5f - boardTileSize.x * 0.5f,
+        GetScreenHeight() * 0.5f - boardTileSize.y * 0.5f
+    };
+
+    for (int y = 0; y < 9; y++)
+    {
+        for (int x = 0; x < 9; x++)
+        {
+            float xpos = screenHalf.x +
+                ((x - tileOffset.x) * boardTileSize.x);
+            float ypos = screenHalf.y +
+                ((y - tileOffset.y) * boardTileSize.y);
+
+            cells[y][x].
+                SetRectangle({ xpos, ypos, boardTileSize.x, boardTileSize.y });
+        }
+    }
+
+    // initialise small 3x3 region positions
+    for (int y = 0; y < 3; y++)
+    {
+        for (int x = 0; x < 3; x++)
+        {
+            float xpos = screenHalf.x +
+                ((x - 1.3333) * boardTileSize.x * 3);
+            float ypos = screenHalf.y +
+                ((y - 1.3333) * boardTileSize.y * 3);
+
+            regions[3 * y + x] = { xpos , ypos, boardTileSize.x * 3,
+                boardTileSize.y * 3 };
+        }
+    }
 }
 
 void GameScene::StartGame()

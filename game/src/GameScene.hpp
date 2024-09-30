@@ -3,6 +3,7 @@
 #include "Scene.hpp"
 #include "Cell.hpp"
 #include "SudokuGenerator.hpp"
+#include "raylib.h"
 
 class GameScene : public Scene
 {
@@ -16,6 +17,7 @@ public:
     void Exit() override;
 
 private:
+    void InitialiseGridPositions();
     void StartGame();
     void SelectCell(int x, int y);
 
@@ -26,6 +28,7 @@ private:
 
     float timer;
     Cell cells[9][9];
+    Rectangle regions[9];
     int selected_x;
     int selected_y;
 };
