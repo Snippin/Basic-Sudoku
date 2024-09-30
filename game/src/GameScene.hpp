@@ -16,6 +16,7 @@ public:
     void Exit() override;
 
 private:
+    void StartGame();
     void SelectCell(int x, int y);
 
     SudokuGenerator generator;

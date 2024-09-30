@@ -9,6 +9,7 @@ public:
     ~Cell();
 
     void SetRectangle(Rectangle new_rectangle);
+    void SetNumber(int new_number);
     void Render();
 
     bool IsHovering() const;
@@ -18,4 +19,5 @@ public:
 private:
     Rectangle rectangle;
     bool is_selected;
+    int number;
 };

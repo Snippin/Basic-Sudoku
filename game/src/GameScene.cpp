@@ -46,39 +46,7 @@ void GameScene::Enter()
         }
     }
 
-    generator.GeneratePuzzle(display_grid, solution_grid);
-
-#if DEBUG
-    printf("\nGRID\n");
-    for (int i = 0; i < 9; i++)
-    {
-        for (int j = 0; j < 9; j++)
-        {
-            if (display_grid[i][j] == 0)
-                printf(".");
-            else
-                printf("%d", display_grid[i][j]);
-
-            printf("|");
-        }
-        printf("\n");
-    }
-
-    printf("\SOLN\n");
-    for (int i = 0; i < 9; i++)
-    {
-        for (int j = 0; j < 9; j++)
-        {
-            if (solution_grid[i][j] == 0)
-                printf(".");
-            else
-                printf("%d", solution_grid[i][j]);
-
-            printf("|");
-        }
-        printf("\n");
-    }
-#endif
+    StartGame();
 }
 
 void GameScene::Update()
@@ -121,12 +89,68 @@ void GameScene::Render()
         }
     }
 
-    cells[selected_y][selected_x].Render();
+    if (selected_x >= 0)
+    {
+        cells[selected_y][selected_x].Render();
+    }
 }
 
 void GameScene::Exit()
 {
 
+}
+
+void GameScene::StartGame()
+{
+    generator.GeneratePuzzle(display_grid, solution_grid);
+
+    for (int y = 0; y < 9; y++)
+    {
+        for (int x = 0; x < 9; x++)
+        {
+            cells[y][x].SetNumber(display_grid[y][x]);
+        }
+    }
+
+#if DEBUG
+    printf("\nGRID\n");
+    for (int i = 0; i < 9; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            if (display_grid[i][j] == 0)
+            {
+                printf(".");
+            }
+            else
+            {
+                printf("%d", display_grid[i][j]);
+            }
+
+            printf("|");
+        }
+        printf("\n");
+    }
+
+    printf("\SOLN\n");
+    for (int i = 0; i < 9; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            if (solution_grid[i][j] == 0)
+            {
+                printf(".");
+            }
+            else
+            {
+                printf("%d", solution_grid[i][j]);
+            }
+
+            printf("|");
+        }
+        printf("\n");
+    }
+#endif
 }
 
 void GameScene::SelectCell(int x, int y)
