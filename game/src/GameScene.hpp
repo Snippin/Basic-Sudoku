@@ -20,6 +20,7 @@ private:
     void InitialiseGridPositions();
     void StartGame();
     void SelectCell(int x, int y);
+    void SetCellNumber(int number);
 
     SudokuGenerator generator;
     int display_grid[9][9];

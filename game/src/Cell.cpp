@@ -4,7 +4,7 @@
 
 #include <string>
 
-Cell::Cell() : rectangle{}, is_selected{}, number{ 0 }
+Cell::Cell() : rectangle{}, is_selected{}, is_correct{}, number{ 0 }
 {
 
 }
@@ -24,6 +24,11 @@ void Cell::SetNumber(int new_number)
     number = new_number;
 }
 
+void Cell::ValidateNumber(int correct_number)
+{
+    is_correct = number == correct_number;
+}
+
 void Cell::Render()
 {
     Font font = ResourceManager::Get()->GetFont();
@@ -36,7 +41,7 @@ void Cell::Render()
     }
     else
     {
-        DrawRectangleLinesEx(rectangle, 1, DARKGRAY);
+        DrawRectangleLinesEx(rectangle, 1.f, DARKGRAY);
     }
 
     if (number != 0)
@@ -56,6 +61,11 @@ void Cell::Render()
 bool Cell::IsHovering() const
 {
     return CheckCollisionPointRec(GetMousePosition(), rectangle);
+}
+
+bool Cell::IsCorrect() const
+{
+    return is_correct;
 }
 
 void Cell::SetSelect(bool select)

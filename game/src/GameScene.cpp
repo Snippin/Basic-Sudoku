@@ -30,6 +30,50 @@ void GameScene::Enter()
 void GameScene::Update()
 {
     timer += GetFrameTime();
+
+    // handle inputs
+    {
+        if (IsKeyPressed(KEY_BACKSPACE))
+        {
+            SetCellNumber(0);
+        }
+        else if (IsKeyPressed(KEY_ONE) || IsKeyPressed(KEY_KP_1))
+        {
+            SetCellNumber(1);
+        }
+        else  if (IsKeyPressed(KEY_TWO) || IsKeyPressed(KEY_KP_2))
+        {
+            SetCellNumber(2);
+        }
+        else  if (IsKeyPressed(KEY_THREE) || IsKeyPressed(KEY_KP_3))
+        {
+            SetCellNumber(3);
+        }
+        else  if (IsKeyPressed(KEY_FOUR) || IsKeyPressed(KEY_KP_4))
+        {
+            SetCellNumber(4);
+        }
+        else  if (IsKeyPressed(KEY_FIVE) || IsKeyPressed(KEY_KP_5))
+        {
+            SetCellNumber(5);
+        }
+        else  if (IsKeyPressed(KEY_SIX) || IsKeyPressed(KEY_KP_6))
+        {
+            SetCellNumber(6);
+        }
+        else  if (IsKeyPressed(KEY_SEVEN) || IsKeyPressed(KEY_KP_7))
+        {
+            SetCellNumber(7);
+        }
+        else  if (IsKeyPressed(KEY_EIGHT) || IsKeyPressed(KEY_KP_8))
+        {
+            SetCellNumber(8);
+        }
+        else  if (IsKeyPressed(KEY_NINE) || IsKeyPressed(KEY_KP_9))
+        {
+            SetCellNumber(9);
+        }
+    }
 }
 
 void GameScene::Render()
@@ -133,6 +177,7 @@ void GameScene::StartGame()
         for (int x = 0; x < 9; x++)
         {
             cells[y][x].SetNumber(display_grid[y][x]);
+            cells[y][x].ValidateNumber(solution_grid[y][x]);
         }
     }
 
@@ -188,4 +233,16 @@ void GameScene::SelectCell(int x, int y)
 
     selected_x = x;
     selected_y = y;
+}
+
+void GameScene::SetCellNumber(int number)
+{
+    if (selected_x < 0 || cells[selected_y][selected_x].IsCorrect())
+    {
+        return;
+    }
+
+    cells[selected_y][selected_x].SetNumber(number);
+    cells[selected_y][selected_x].
+        ValidateNumber(solution_grid[selected_y][selected_x]);
 }
