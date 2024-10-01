@@ -4,7 +4,8 @@
 
 #include <string>
 
-Cell::Cell() : rectangle{}, is_selected{}, is_correct{}, number{ 0 }
+Cell::Cell() :
+    rectangle{}, is_selected{}, is_correct{}, is_given{}, number{ 0 }
 {
 
 }
@@ -19,9 +20,10 @@ void Cell::SetRectangle(Rectangle new_rectangle)
     rectangle = new_rectangle;
 }
 
-void Cell::SetNumber(int new_number)
+void Cell::SetNumber(int new_number, bool given)
 {
     number = new_number;
+    is_given = given;
 }
 
 void Cell::ValidateNumber(int correct_number)
@@ -52,7 +54,17 @@ void Cell::Render()
             rectangle.x + rectangle.width * 0.5f - textSize.x * 0.5f,
             rectangle.y + rectangle.height * 0.05f
         };
+
         Color textColor = WHITE;
+        if (!is_given)
+        {
+            textColor = BLUE;
+            if (!is_correct)
+            {
+                textColor = RED;
+            }
+        }
+
         DrawTextEx(font, std::to_string(number).c_str(), textPos, font_size,
             text_spacing, textColor);
     }

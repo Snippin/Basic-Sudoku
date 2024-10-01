@@ -176,7 +176,7 @@ void GameScene::StartGame()
     {
         for (int x = 0; x < 9; x++)
         {
-            cells[y][x].SetNumber(display_grid[y][x]);
+            cells[y][x].SetNumber(display_grid[y][x], true);
             cells[y][x].ValidateNumber(solution_grid[y][x]);
         }
     }

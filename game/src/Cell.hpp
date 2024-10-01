@@ -9,7 +9,7 @@ public:
     ~Cell();
 
     void SetRectangle(Rectangle new_rectangle);
-    void SetNumber(int new_number);
+    void SetNumber(int new_number, bool given = false);
     void ValidateNumber(int correct_number);
     void Render();
 
@@ -22,5 +22,6 @@ private:
     Rectangle rectangle;
     bool is_selected;
     bool is_correct;
+    bool is_given;
     int number;
 };
