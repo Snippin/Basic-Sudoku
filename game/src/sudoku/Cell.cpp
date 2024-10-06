@@ -1,6 +1,6 @@
 #include "Cell.hpp"
 
-#include "singleton/ResourceManager.hpp"
+#include "core/ResourceManager.hpp"
 #include "raylib.h"
 
 #include <string>

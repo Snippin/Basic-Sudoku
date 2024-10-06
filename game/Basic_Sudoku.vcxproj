@@ -266,22 +266,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Cell.cpp" />
+    <ClCompile Include="src\core\Application.cpp" />
+    <ClCompile Include="src\core\main.cpp" />
+    <ClCompile Include="src\core\ResourceManager.cpp" />
     <ClCompile Include="src\GameScene.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\singleton\Application.cpp" />
-    <ClCompile Include="src\singleton\ResourceManager.cpp" />
-    <ClCompile Include="src\SudokuGenerator.cpp" />
+    <ClCompile Include="src\sudoku\Cell.cpp" />
+    <ClCompile Include="src\sudoku\SudokuGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Cell.hpp" />
-    <ClInclude Include="src\DifficultyLevel.hpp" />
+    <ClInclude Include="src\core\Application.hpp" />
+    <ClInclude Include="src\core\ResourceManager.hpp" />
     <ClInclude Include="src\GameScene.hpp" />
-    <ClInclude Include="src\Scene.hpp" />
-    <ClInclude Include="src\singleton\Application.hpp" />
-    <ClInclude Include="src\singleton\ResourceManager.hpp" />
-    <ClInclude Include="src\singleton\SingletonTemplate.hpp" />
-    <ClInclude Include="src\SudokuGenerator.hpp" />
+    <ClInclude Include="src\sudoku\Cell.hpp" />
+    <ClInclude Include="src\sudoku\DifficultyLevel.hpp" />
+    <ClInclude Include="src\sudoku\SudokuGenerator.hpp" />
+    <ClInclude Include="src\template\Scene.hpp" />
+    <ClInclude Include="src\template\SingletonTemplate.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

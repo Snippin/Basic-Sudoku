@@ -1,57 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{21EB8090-0D4E-1035-B6D3-48EBA215DCB7}</UniqueIdentifier>
+    <Filter Include="core">
+      <UniqueIdentifier>{de940aef-5d9c-4197-88ba-aa45b8221c3f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files">
+    <Filter Include="template">
+      <UniqueIdentifier>{db5fc0d3-9c25-4aa4-8ca3-c4446a433829}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sudoku">
+      <UniqueIdentifier>{4d63cc28-6fb5-4fc5-9129-27b5a96980d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source">
       <UniqueIdentifier>{E9C7FDCE-D52A-8D73-7EB0-C5296AF258F6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\core\Application.cpp">
+      <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="src\singleton\Application.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\core\main.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\ResourceManager.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sudoku\Cell.cpp">
+      <Filter>sudoku</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sudoku\SudokuGenerator.cpp">
+      <Filter>sudoku</Filter>
     </ClCompile>
     <ClCompile Include="src\GameScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\singleton\ResourceManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Cell.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SudokuGenerator.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\singleton\Application.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\core\Application.hpp">
+      <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="src\singleton\SingletonTemplate.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\core\ResourceManager.hpp">
+      <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Scene.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\template\SingletonTemplate.hpp">
+      <Filter>template</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sudoku\Cell.hpp">
+      <Filter>sudoku</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sudoku\DifficultyLevel.hpp">
+      <Filter>sudoku</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sudoku\SudokuGenerator.hpp">
+      <Filter>sudoku</Filter>
+    </ClInclude>
+    <ClInclude Include="src\template\Scene.hpp">
+      <Filter>template</Filter>
     </ClInclude>
     <ClInclude Include="src\GameScene.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\singleton\ResourceManager.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Cell.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SudokuGenerator.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DifficultyLevel.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>source</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

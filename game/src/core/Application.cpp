@@ -1,6 +1,6 @@
 #include "Application.hpp"
 
-#include "GameScene.hpp"
+#include "../GameScene.hpp"
 #include "ResourceManager.hpp"
 
 #include "raylib.h"

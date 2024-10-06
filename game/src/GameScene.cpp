@@ -1,8 +1,8 @@
 #include "GameScene.hpp"
 
 #include "raylib.h"
-#include "singleton/ResourceManager.hpp"
-#include "DifficultyLevel.hpp"
+#include "core/ResourceManager.hpp"
+#include "sudoku/DifficultyLevel.hpp"
 
 #include <cstdio>
 #include <cstdlib>

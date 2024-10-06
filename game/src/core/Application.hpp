@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SingletonTemplate.hpp"
+#include "template/SingletonTemplate.hpp"
 
 class Scene;
 

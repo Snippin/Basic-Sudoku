@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Scene.hpp"
-#include "Cell.hpp"
-#include "SudokuGenerator.hpp"
-#include "DifficultyLevel.hpp"
+#include "template/Scene.hpp"
+#include "sudoku/Cell.hpp"
+#include "sudoku/SudokuGenerator.hpp"
+#include "sudoku/DifficultyLevel.hpp"
 #include "raylib.h"
 
 class GameScene : public Scene
