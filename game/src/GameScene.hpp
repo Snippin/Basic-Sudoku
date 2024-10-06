@@ -3,6 +3,7 @@
 #include "Scene.hpp"
 #include "Cell.hpp"
 #include "SudokuGenerator.hpp"
+#include "DifficultyLevel.hpp"
 #include "raylib.h"
 
 class GameScene : public Scene
@@ -24,6 +25,7 @@ private:
     void HighlightRowCol(bool highlight);
 
     SudokuGenerator generator;
+    DifficultyLevel difficulty_level;
     int display_grid[9][9];
     int solution_grid[9][9];
 

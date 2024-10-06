@@ -27,11 +27,11 @@ SudokuGenerator::~SudokuGenerator()
 }
 
 void SudokuGenerator::GeneratePuzzle(int display_grid[9][9],
-    int solution_grid[9][9])
+    int solution_grid[9][9], DifficultyLevel difficulty)
 {
     Randomize(display_grid);
     CreateSeed(display_grid, solution_grid);
-    RemoveNumbers(display_grid);
+    RemoveNumbers(display_grid, difficulty);
 }
 
 void SudokuGenerator::Randomize(int grid[9][9])
@@ -54,10 +54,27 @@ void SudokuGenerator::Randomize(int grid[9][9])
     }
 }
 
-void SudokuGenerator::RemoveNumbers(int grid[9][9])
+void SudokuGenerator::RemoveNumbers(int grid[9][9], DifficultyLevel difficulty)
 {
     int count = 81;
-    count -= GetRandomNumber(31, 28);
+
+    switch (difficulty)
+    {
+    case DifficultyLevel::EASY:
+        count -= GetRandomNumber(35, 32);
+        break;
+
+    case DifficultyLevel::MEDIUM:
+        count -= GetRandomNumber(31, 28);
+        break;
+
+    case DifficultyLevel::HARD:
+        count -= GetRandomNumber(27, 22);
+        break;
+
+    default:
+        return;
+    }
 
     while (count > 0)
     {

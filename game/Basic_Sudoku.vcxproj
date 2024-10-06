@@ -275,6 +275,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Cell.hpp" />
+    <ClInclude Include="src\DifficultyLevel.hpp" />
     <ClInclude Include="src\GameScene.hpp" />
     <ClInclude Include="src\Scene.hpp" />
     <ClInclude Include="src\singleton\Application.hpp" />

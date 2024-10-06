@@ -2,14 +2,15 @@
 
 #include "raylib.h"
 #include "singleton/ResourceManager.hpp"
+#include "DifficultyLevel.hpp"
 
 #include <cstdio>
 #include <cstdlib>
 #include <ctime>
 
 GameScene::GameScene() :
-    timer{ 0 }, cells{}, regions{}, selected_x{ -1 }, selected_y{ -1 },
-    note_placing_mode{}
+    difficulty_level{ DifficultyLevel::MEDIUM }, timer{ 0 }, cells{}, regions{},
+    selected_x{ -1 }, selected_y{ -1 }, note_placing_mode{}
 {
 
 }
@@ -174,7 +175,7 @@ void GameScene::InitialiseGridPositions()
 
 void GameScene::StartGame()
 {
-    generator.GeneratePuzzle(display_grid, solution_grid);
+    generator.GeneratePuzzle(display_grid, solution_grid, difficulty_level);
 
     for (int y = 0; y < 9; y++)
     {
