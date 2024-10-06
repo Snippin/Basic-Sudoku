@@ -21,6 +21,7 @@ private:
     void StartGame();
     void SelectCell(int x, int y);
     void SetCellNumber(int number);
+    void HighlightRowCol(bool highlight);
 
     SudokuGenerator generator;
     int display_grid[9][9];

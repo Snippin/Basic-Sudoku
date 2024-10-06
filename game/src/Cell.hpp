@@ -17,11 +17,13 @@ public:
     bool IsCorrect() const;
     void SetSelect(bool select);
     bool IsSelected() const;
+    void SetHighlight(bool highlight);
 
 private:
     Rectangle rectangle;
     bool is_selected;
     bool is_correct;
     bool is_given;
+    bool is_highlighted;
     int number;
 };

@@ -5,7 +5,8 @@
 #include <string>
 
 Cell::Cell() :
-    rectangle{}, is_selected{}, is_correct{}, is_given{}, number{ 0 }
+    rectangle{}, is_selected{}, is_correct{}, is_given{}, is_highlighted{},
+    number{ 0 }
 {
 
 }
@@ -37,6 +38,7 @@ void Cell::Render()
     float font_size = font.baseSize * 3.f;
     float text_spacing = 4.f;
 
+    // render border
     if (is_selected)
     {
         DrawRectangleLinesEx(rectangle, 1.5f, YELLOW);
@@ -46,6 +48,15 @@ void Cell::Render()
         DrawRectangleLinesEx(rectangle, 1.f, DARKGRAY);
     }
 
+    // render background
+    if (is_highlighted)
+    {
+        Color highlightColor = SKYBLUE;
+        highlightColor.a -= 155;
+        DrawRectangleRec(rectangle, highlightColor);
+    }
+
+    // render number
     if (number != 0)
     {
         Vector2 textSize = MeasureTextEx(font, std::to_string(number).c_str(),
@@ -88,4 +99,9 @@ void Cell::SetSelect(bool select)
 bool Cell::IsSelected() const
 {
     return is_selected;
+}
+
+void Cell::SetHighlight(bool highlight)
+{
+    is_highlighted = highlight;
 }

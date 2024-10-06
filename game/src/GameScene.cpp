@@ -7,8 +7,6 @@
 #include <cstdlib>
 #include <ctime>
 
-#define DEBUG 1
-
 GameScene::GameScene() :
     timer{ 0 }, selected_x{ -1 }, selected_y{ -1 }
 {
@@ -181,7 +179,7 @@ void GameScene::StartGame()
         }
     }
 
-#if DEBUG
+#if _DEBUG
     printf("\nGRID\n");
     for (int i = 0; i < 9; i++)
     {
@@ -229,10 +227,13 @@ void GameScene::SelectCell(int x, int y)
         cells[selected_y][selected_x].SetSelect(false);
     }
 
-    cells[y][x].SetSelect(true);
+    HighlightRowCol(false);
 
     selected_x = x;
     selected_y = y;
+    cells[y][x].SetSelect(true);
+
+    HighlightRowCol(true);
 }
 
 void GameScene::SetCellNumber(int number)
@@ -245,4 +246,13 @@ void GameScene::SetCellNumber(int number)
     cells[selected_y][selected_x].SetNumber(number);
     cells[selected_y][selected_x].
         ValidateNumber(solution_grid[selected_y][selected_x]);
+}
+
+void GameScene::HighlightRowCol(bool highlight)
+{
+    for (int i = 0; i < 9; i++)
+    {
+        cells[selected_y][i].SetHighlight(highlight);
+        cells[i][selected_x].SetHighlight(highlight);
+    }
 }
