@@ -27,10 +27,10 @@ private:
     int display_grid[9][9];
     int solution_grid[9][9];
 
-
     float timer;
     Cell cells[9][9];
     Rectangle regions[9];
     int selected_x;
     int selected_y;
+    bool note_placing_mode;
 };

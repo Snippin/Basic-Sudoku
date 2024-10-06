@@ -18,6 +18,7 @@ public:
     void SetSelect(bool select);
     bool IsSelected() const;
     void SetHighlight(bool highlight);
+    void SetNote(int number);
 
 private:
     Rectangle rectangle;
@@ -26,4 +27,5 @@ private:
     bool is_given;
     bool is_highlighted;
     int number;
+    bool notes[9];
 };

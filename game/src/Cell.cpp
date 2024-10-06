@@ -1,12 +1,13 @@
 #include "Cell.hpp"
 
 #include "singleton/ResourceManager.hpp"
+#include "raylib.h"
 
 #include <string>
 
 Cell::Cell() :
     rectangle{}, is_selected{}, is_correct{}, is_given{}, is_highlighted{},
-    number{ 0 }
+    number{ 0 }, notes{}
 {
 
 }
@@ -56,28 +57,51 @@ void Cell::Render()
         DrawRectangleRec(rectangle, highlightColor);
     }
 
-    // render number
-    if (number != 0)
+    // render notes
+    if (number == 0)
     {
-        Vector2 textSize = MeasureTextEx(font, std::to_string(number).c_str(),
+        float note_size = font_size * 0.333f;
+        float note_spacing = text_spacing * 0.333f;
+        Vector2 text_position = { rectangle.x + note_size * 0.3f, rectangle.y };
+
+        std::string notes_str = "";
+        for (int i = 0; i < 9; i++)
+        {
+            int row = i / 3;
+            int col = i % 3;
+            Vector2 position = { text_position.x + (col * note_size),
+                text_position.y + (row * note_size) };
+
+            if (notes[i])
+            {
+                notes_str += TextFormat("%d", i + 1);
+                DrawTextEx(font, std::to_string(i + 1).c_str(), position,
+                    note_size, note_spacing, LIGHTGRAY);
+            }
+        }
+    }
+    // render number
+    else
+    {
+        Vector2 text_size = MeasureTextEx(font, std::to_string(number).c_str(),
             font_size, text_spacing);
-        Vector2 textPos = {
-            rectangle.x + rectangle.width * 0.5f - textSize.x * 0.5f,
+        Vector2 text_position = {
+            rectangle.x + rectangle.width * 0.5f - text_size.x * 0.5f,
             rectangle.y + rectangle.height * 0.05f
         };
 
-        Color textColor = WHITE;
+        Color text_color = WHITE;
         if (!is_given)
         {
-            textColor = BLUE;
+            text_color = BLUE;
             if (!is_correct)
             {
-                textColor = RED;
+                text_color = RED;
             }
         }
 
-        DrawTextEx(font, std::to_string(number).c_str(), textPos, font_size,
-            text_spacing, textColor);
+        DrawTextEx(font, std::to_string(number).c_str(), text_position,
+            font_size, text_spacing, text_color);
     }
 }
 
@@ -104,4 +128,9 @@ bool Cell::IsSelected() const
 void Cell::SetHighlight(bool highlight)
 {
     is_highlighted = highlight;
+}
+
+void Cell::SetNote(int number)
+{
+    notes[number - 1] = !notes[number - 1];
 }

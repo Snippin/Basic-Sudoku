@@ -8,7 +8,8 @@
 #include <ctime>
 
 GameScene::GameScene() :
-    timer{ 0 }, selected_x{ -1 }, selected_y{ -1 }
+    timer{ 0 }, cells{}, regions{}, selected_x{ -1 }, selected_y{ -1 },
+    note_placing_mode{}
 {
 
 }
@@ -31,6 +32,11 @@ void GameScene::Update()
 
     // handle inputs
     {
+        if (IsKeyPressed(KEY_N))
+        {
+            note_placing_mode = !note_placing_mode;
+        }
+
         if (IsKeyPressed(KEY_BACKSPACE))
         {
             SetCellNumber(0);
@@ -243,9 +249,16 @@ void GameScene::SetCellNumber(int number)
         return;
     }
 
-    cells[selected_y][selected_x].SetNumber(number);
-    cells[selected_y][selected_x].
-        ValidateNumber(solution_grid[selected_y][selected_x]);
+    if (note_placing_mode)
+    {
+        cells[selected_y][selected_x].SetNote(number);
+    }
+    else
+    {
+        cells[selected_y][selected_x].SetNumber(number);
+        cells[selected_y][selected_x].
+            ValidateNumber(solution_grid[selected_y][selected_x]);
+    }
 }
 
 void GameScene::HighlightRowCol(bool highlight)
