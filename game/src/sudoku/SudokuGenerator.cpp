@@ -21,11 +21,6 @@ SudokuGenerator::SudokuGenerator() :
 
 }
 
-SudokuGenerator::~SudokuGenerator()
-{
-
-}
-
 void SudokuGenerator::GeneratePuzzle(int display_grid[9][9],
     int solution_grid[9][9], DifficultyLevel difficulty)
 {
@@ -231,21 +226,27 @@ bool SudokuGenerator::SolveGrid(int grid[9][9])
         return true; // success
 
     // consider digits 1 to 9
-    for (int num = 0; num < 9; num++)
-    {
-        // if looks promising
-        if (IsSafe(grid, row, col, guess_number[num]))
+    if (std::any_of(std::begin(guess_number), std::end(guess_number),
+        [&](int num)
         {
-            // make tentative assignment
-            grid[row][col] = guess_number[num];
+            // if it looks promising
+            if (IsSafe(grid, row, col, num))
+            {
+                // make tentative assignment
+                grid[row][col] = num;
 
-            // if success, return
-            if (SolveGrid(grid))
-                return true;
+                // if success, return
+                if (SolveGrid(grid))
+                    return true;
 
-            // failure, unmake & try again
-            grid[row][col] = UNASSIGNED;
-        }
+                // failure, unmake & try again
+                grid[row][col] = UNASSIGNED;
+            }
+
+            return false;
+        }))
+    {
+        return true;
     }
 
     return false;

@@ -6,19 +6,19 @@ class Cell
 {
 public:
     Cell();
-    ~Cell();
+    ~Cell() = default;
 
     void SetRectangle(Rectangle new_rectangle);
     void SetNumber(int new_number, bool given = false);
     void ValidateNumber(int correct_number);
     void Render();
 
-    bool IsHovering() const;
-    bool IsCorrect() const;
+    [[nodiscard]] bool IsHovering() const;
+    [[nodiscard]] bool IsCorrect() const;
     void SetSelect(bool select);
-    bool IsSelected() const;
+    [[nodiscard]] bool IsSelected() const;
     void SetHighlight(bool highlight);
-    void SetNote(int number);
+    void SetNote(int number_to_set);
 
 private:
     Rectangle rectangle;

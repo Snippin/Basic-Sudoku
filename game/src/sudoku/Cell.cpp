@@ -5,14 +5,11 @@
 
 #include <string>
 
+constexpr float text_spacing = 4.f;
+
 Cell::Cell() :
     rectangle{}, is_selected{}, is_correct{}, is_given{}, is_highlighted{},
     number{ 0 }, notes{}
-{
-
-}
-
-Cell::~Cell()
 {
 
 }
@@ -35,9 +32,8 @@ void Cell::ValidateNumber(int correct_number)
 
 void Cell::Render()
 {
-    Font font = ResourceManager::Get()->GetFont();
-    float font_size = font.baseSize * 3.f;
-    float text_spacing = 4.f;
+    const Font font = ResourceManager::Get()->GetFont();
+    const float font_size = font.baseSize * 3.f;
 
     // render border
     if (is_selected)
@@ -130,7 +126,7 @@ void Cell::SetHighlight(bool highlight)
     is_highlighted = highlight;
 }
 
-void Cell::SetNote(int number)
+void Cell::SetNote(int number_to_set)
 {
-    notes[number - 1] = !notes[number - 1];
+    notes[number_to_set - 1] = !notes[number_to_set - 1];
 }

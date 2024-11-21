@@ -3,8 +3,8 @@
 class Scene
 {
 public:
-    Scene() {}
-    ~Scene() {}
+    Scene() = default;
+    virtual ~Scene() = default;
 
     virtual void Enter() {}
     virtual void Update() = 0;

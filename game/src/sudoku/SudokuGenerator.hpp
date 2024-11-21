@@ -6,7 +6,7 @@ class SudokuGenerator
 {
 public:
     SudokuGenerator();
-    ~SudokuGenerator();
+    ~SudokuGenerator() = default;
 
     void GeneratePuzzle(int display_grid[9][9], int solution_grid[9][9],
         DifficultyLevel difficulty);

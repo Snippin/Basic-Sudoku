@@ -36,7 +36,7 @@ void Application::Run()
 
 void Application::Exit()
 {
-    if (scene != NULL)
+    if (scene != nullptr)
     {
         scene->Exit();
         delete scene;

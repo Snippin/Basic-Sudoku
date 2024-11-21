@@ -13,8 +13,8 @@ public:
     void Run();
     void Exit();
 
-    int GetScreenWidth() const;
-    int GetScreenHeight() const;
+    [[nodiscard]] int GetScreenWidth() const;
+    [[nodiscard]] int GetScreenHeight() const;
 
 private:
     void Update();

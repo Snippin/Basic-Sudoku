@@ -9,13 +9,9 @@
 #include <ctime>
 
 GameScene::GameScene() :
-    difficulty_level{ DifficultyLevel::MEDIUM }, timer{ 0 }, cells{}, regions{},
-    selected_x{ -1 }, selected_y{ -1 }, note_placing_mode{}
-{
-
-}
-
-GameScene::~GameScene()
+    difficulty_level{ DifficultyLevel::MEDIUM }, display_grid{},
+    solution_grid{}, timer{ 0 }, cells{}, regions{}, selected_x{ -1 },
+    selected_y{ -1 }, note_placing_mode{}
 {
 
 }

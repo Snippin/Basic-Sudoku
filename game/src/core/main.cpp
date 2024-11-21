@@ -1,4 +1,4 @@
-#include "singleton/Application.hpp"
+#include "core/Application.hpp"
 
 int main()
 {

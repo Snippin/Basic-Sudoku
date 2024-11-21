@@ -1,6 +1,8 @@
 #pragma once
 
-enum class DifficultyLevel
+#include <cstdint>
+
+enum class DifficultyLevel : uint8_t
 {
     EASY,
     MEDIUM,

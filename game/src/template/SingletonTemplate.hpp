@@ -3,6 +3,8 @@
 template <typename T>
 class Singleton
 {
+    friend T;
+
 public:
     static T *Get()
     {
@@ -19,19 +21,14 @@ public:
         if (instance)
         {
             delete instance;
-            instance = NULL;
+            instance = nullptr;
         }
     }
 
-protected:
-    Singleton()
-    {
-    }
-    ~Singleton()
-    {
-    }
-
 private:
+    Singleton() = default;
+    ~Singleton() = default;
+
     static T *instance;
 };
 

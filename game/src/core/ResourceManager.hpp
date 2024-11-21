@@ -11,7 +11,7 @@ public:
     void LoadResources();
     void UnloadResources() const;
 
-    Font GetFont() const;
+    [[nodiscard]] Font GetFont() const;
 
 private:
     Font font;
