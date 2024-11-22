@@ -14,14 +14,18 @@ public:
     void Enter() override;
     void Update() override;
     void Render() override;
-    void Exit() override;
 
 private:
+    void RenderGrid();
+    void RenderEnd();
+
     void InitialiseGridPositions();
     void StartGame();
     void SelectCell(int x, int y);
     void SetCellNumber(int number);
     void HighlightRowCol(bool highlight);
+    void CheckBoard();
+    void EndGame();
 
     SudokuGenerator generator;
     DifficultyLevel difficulty_level;
@@ -34,4 +38,7 @@ private:
     int selected_x;
     int selected_y;
     bool note_placing_mode;
+
+    int remaining_space;
+    bool game_over;
 };
