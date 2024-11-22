@@ -25,6 +25,11 @@ void Cell::SetNumber(int new_number, bool given)
     is_given = given;
 }
 
+int Cell::GetNumber() const
+{
+    return number;
+}
+
 void Cell::ValidateNumber(int correct_number)
 {
     is_correct = number == correct_number;

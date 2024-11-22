@@ -11,8 +11,9 @@
 
 GameScene::GameScene() :
     difficulty_level{ DifficultyLevel::MEDIUM }, display_grid{},
-    solution_grid{}, timer{ 0 }, cells{}, regions{}, selected_x{ -1 },
-    selected_y{ -1 }, note_placing_mode{}, remaining_space{ 0 }, game_over{}
+    solution_grid{}, cells{}, regions{}, selected_x{ -1 }, selected_y{ -1 },
+    note_placing_mode{}, remaining_space{ 0 }, game_over{}, timer{ 0 },
+    wrong_inputs{ 0 }
 {
 
 }
@@ -89,6 +90,8 @@ void GameScene::Update()
 void GameScene::Render()
 {
     int screen_width = GetScreenWidth();
+    Vector2 screen_half = { static_cast<float>(screen_width) * 0.5f,
+        static_cast<float>(GetScreenHeight()) * 0.5f };
     Font font = ResourceManager::Get()->GetFont();
     float font_size = static_cast<float>(font.baseSize)* 3.f;
     float text_spacing = 4.f;
@@ -98,10 +101,17 @@ void GameScene::Render()
         TextFormat("%02d:%02d", static_cast<int>(timer) / 60,
             static_cast<int>(timer) % 60);
     Vector2 text_size = MeasureTextEx(font, text, font_size, text_spacing);
-    Vector2 textPos = {
+    Vector2 text_pos = {
         static_cast<float>(screen_width) * 0.5f - (text_size.x * 0.5f),
         font_size * 0.5f };
-    DrawTextEx(font, text, textPos, font_size, text_spacing, WHITE);
+    DrawTextEx(font, text, text_pos, font_size, text_spacing, WHITE);
+
+    // wrong inputs
+    text = TextFormat("Errors: %d", wrong_inputs);
+    text_size = MeasureTextEx(font, text, font_size, text_spacing);
+    text_pos = { static_cast<float>(screen_width) - (text_size.x * 1.5f),
+    screen_half.y - (font_size * 0.5f) };
+    DrawTextEx(font, text, text_pos, font_size, text_spacing, RED);
 
     RenderGrid();
     if (game_over)
@@ -141,7 +151,8 @@ void GameScene::RenderGrid()
     if (selected_x >= 0)
     {
         cells[selected_y][selected_x].Render();
-    }}
+    }
+}
 
 void GameScene::RenderEnd()
 {
@@ -205,6 +216,7 @@ void GameScene::InitialiseGridPositions()
 void GameScene::StartGame()
 {
     timer = 0;
+    wrong_inputs = 0;
     note_placing_mode = false;
     game_over= false;
 
@@ -295,11 +307,13 @@ void GameScene::SetCellNumber(int number)
     }
     else
     {
+        int initial_number = cells[selected_y][selected_x].GetNumber();
+
         cells[selected_y][selected_x].SetNumber(number);
         cells[selected_y][selected_x].
             ValidateNumber(solution_grid[selected_y][selected_x]);
 
-        CheckBoard();
+        CheckBoard(initial_number, number);
     }
 }
 
@@ -312,7 +326,7 @@ void GameScene::HighlightRowCol(bool highlight)
     }
 }
 
-void GameScene::CheckBoard()
+void GameScene::CheckBoard(int initial_number, int input_number)
 {
     if (cells[selected_y][selected_x].IsCorrect())
     {
@@ -321,6 +335,10 @@ void GameScene::CheckBoard()
         {
             EndGame();
         }
+    }
+    else if (input_number != initial_number && input_number != 0)
+    {
+        wrong_inputs++;
     }
 }
 

@@ -10,6 +10,7 @@ public:
 
     void SetRectangle(Rectangle new_rectangle);
     void SetNumber(int new_number, bool given = false);
+    [[nodiscard]] int GetNumber() const;
     void ValidateNumber(int correct_number);
     void Render();
 
