@@ -3,6 +3,8 @@
 #include "../GameScene.hpp"
 #include "ResourceManager.hpp"
 
+#define RAYGUI_IMPLEMENTATION
+#include "raygui.h"
 #include "raylib.h"
 
 void Application::Initialise()
