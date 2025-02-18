@@ -13,6 +13,9 @@
     <Filter Include="source">
       <UniqueIdentifier>{E9C7FDCE-D52A-8D73-7EB0-C5296AF258F6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{ac7750c3-e8c3-4978-842c-f8db8c2a2b5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\Application.cpp">
@@ -30,8 +33,8 @@
     <ClCompile Include="src\sudoku\SudokuGenerator.cpp">
       <Filter>sudoku</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameScene.cpp">
-      <Filter>source</Filter>
+    <ClCompile Include="src\scene\GameScene.cpp">
+      <Filter>scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,8 +59,8 @@
     <ClInclude Include="src\template\Scene.hpp">
       <Filter>template</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameScene.hpp">
-      <Filter>source</Filter>
+    <ClInclude Include="src\scene\GameScene.hpp">
+      <Filter>scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

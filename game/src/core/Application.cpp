@@ -1,6 +1,6 @@
 #include "Application.hpp"
 
-#include "../GameScene.hpp"
+#include "scene/GameScene.hpp"
 #include "ResourceManager.hpp"
 
 #define RAYGUI_IMPLEMENTATION

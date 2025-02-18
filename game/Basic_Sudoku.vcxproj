@@ -269,14 +269,14 @@
     <ClCompile Include="src\core\Application.cpp" />
     <ClCompile Include="src\core\main.cpp" />
     <ClCompile Include="src\core\ResourceManager.cpp" />
-    <ClCompile Include="src\GameScene.cpp" />
+    <ClCompile Include="src\scene\GameScene.cpp" />
     <ClCompile Include="src\sudoku\Cell.cpp" />
     <ClCompile Include="src\sudoku\SudokuGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Application.hpp" />
     <ClInclude Include="src\core\ResourceManager.hpp" />
-    <ClInclude Include="src\GameScene.hpp" />
+    <ClInclude Include="src\scene\GameScene.hpp" />
     <ClInclude Include="src\sudoku\Cell.hpp" />
     <ClInclude Include="src\sudoku\DifficultyLevel.hpp" />
     <ClInclude Include="src\sudoku\SudokuGenerator.hpp" />
