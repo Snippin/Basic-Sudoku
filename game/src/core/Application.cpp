@@ -55,7 +55,11 @@ void Application::Exit()
 
 void Application::ChangeScene(SceneType sceneType)
 {
-    scene->Exit();
+    if (scene != nullptr)
+    {
+        scene->Exit();
+        scene.reset();
+    }
 
     switch (sceneType)
     {
@@ -66,6 +70,9 @@ void Application::ChangeScene(SceneType sceneType)
     case SceneType::Game:
         scene = std::make_unique<GameScene>();
         break;
+
+    default:
+        return;
     }
 
     scene->Enter();
