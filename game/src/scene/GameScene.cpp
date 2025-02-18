@@ -2,9 +2,11 @@
 
 #include "raylib.h"
 #include "core/raygui.h"
+#include "core/Application.hpp"
 #include "core/ResourceManager.hpp"
 #include "sudoku/DifficultyLevel.hpp"
 #include "sudoku/Cell.hpp"
+#include "SceneType.hpp"
 
 #include <cstdio>
 #include <cstdlib>
@@ -62,7 +64,7 @@ void GameScene::Update()
         timer += GetFrameTime();
     }
 
-    // handle inputs
+    // Handle inputs
     {
         if (IsKeyPressed((KEY_L)))
         {
@@ -126,7 +128,7 @@ void GameScene::Render()
     float font_size = static_cast<float>(font.baseSize)* 3.f;
     float text_spacing = 4.f;
 
-    // timer
+    // Timer
     const char *text =
         TextFormat("%02d:%02d", static_cast<int>(timer) / 60,
             static_cast<int>(timer) % 60);
@@ -136,12 +138,18 @@ void GameScene::Render()
         font_size * 0.5f };
     DrawTextEx(font, text, text_pos, font_size, text_spacing, WHITE);
 
-    // wrong inputs
+    // Wrong inputs
     text = TextFormat("Errors: %d", wrong_inputs);
     text_size = MeasureTextEx(font, text, font_size, text_spacing);
     text_pos = { static_cast<float>(screen_width) - (text_size.x * 1.5f),
     screen_half.y - (font_size * 0.5f) };
     DrawTextEx(font, text, text_pos, font_size, text_spacing, RED);
+
+    // Exit button
+    if (GuiButton({ 10, 10, 50, 50 }, "Exit"))
+    {
+        Application::Get()->ChangeScene(SceneType::MainMenu);
+    }
 
     RenderGrid();
     if (game_over)
@@ -152,7 +160,7 @@ void GameScene::Render()
 
 void GameScene::RenderGrid()
 {
-    // render cells
+    // Render cells
     for (int x = 0; x < 9; x++)
     {
         for (int y = 0; y < 9; y++)
@@ -172,7 +180,7 @@ void GameScene::RenderGrid()
         }
     }
 
-    // render 3x3 regions
+    // Render 3x3 regions
     for (const auto region : regions)
     {
         DrawRectangleLinesEx(region, 2.5f, GRAY);
@@ -190,7 +198,7 @@ void GameScene::RenderEnd()
      Vector2 screen_half = { static_cast<float>(GetScreenWidth()) * 0.5f,
          static_cast<float>(screen_height) * 0.5f };
 
-    // buttons
+    // Buttons
     Vector2 button_size = { 200, 50 };
     Vector2 button_position = {
         screen_half.x - (button_size.x * 0.5f),
@@ -205,7 +213,7 @@ void GameScene::RenderEnd()
 
 void GameScene::InitialiseGridPositions()
 {
-    // initialise 9x9 cell positions
+    // Initialise 9x9 cell positions
     Vector2 boardTileSize = { 50, 50 };
     Vector2 tileOffset = { 4, 4 };
     Vector2 screenHalf = {
@@ -227,7 +235,7 @@ void GameScene::InitialiseGridPositions()
         }
     }
 
-    // initialise small 3x3 region positions
+    // Initialise small 3x3 region positions
     for (int y = 0; y < 3; y++)
     {
         for (int x = 0; x < 3; x++)
