@@ -15,9 +15,6 @@ public:
     void Run();
     void Exit();
 
-    [[nodiscard]] int GetScreenWidth() const;
-    [[nodiscard]] int GetScreenHeight() const;
-
 private:
     void Update();
     void Render();

@@ -51,16 +51,6 @@ void Application::Exit()
     CloseWindow();
 }
 
-int Application::GetScreenWidth() const
-{
-    return screen_width;
-}
-
-int Application::GetScreenHeight() const
-{
-    return screen_height;
-}
-
 void Application::Update()
 {
     scene->Update();
