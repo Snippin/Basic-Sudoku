@@ -4,6 +4,7 @@
 #include "core/raygui.h"
 #include "core/ResourceManager.hpp"
 #include "sudoku/DifficultyLevel.hpp"
+#include "sudoku/Cell.hpp"
 
 #include <cstdio>
 #include <cstdlib>
