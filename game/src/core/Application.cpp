@@ -1,14 +1,15 @@
 #include "Application.hpp"
 
-#include "scene/MainMenuScene.hpp"
-#include "scene/GameScene.hpp"
 #include "ResourceManager.hpp"
+#include "scene/GameScene.hpp"
+#include "scene/MainMenuScene.hpp"
 
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
 #include "raylib.h"
 
 #include <memory>
+#include <SceneType.hpp>
 
 void Application::Initialise()
 {
@@ -50,6 +51,24 @@ void Application::Exit()
 
     CloseAudioDevice();
     CloseWindow();
+}
+
+void Application::ChangeScene(SceneType sceneType)
+{
+    scene->Exit();
+
+    switch (sceneType)
+    {
+    case SceneType::MainMenu:
+        scene = std::make_unique<MainMenuScene>();
+        break;
+
+    case SceneType::Game:
+        scene = std::make_unique<GameScene>();
+        break;
+    }
+
+    scene->Enter();
 }
 
 void Application::Update()

@@ -68,5 +68,8 @@
     <ClInclude Include="src\scene\MainMenuScene.hpp">
       <Filter>scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\SceneType.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

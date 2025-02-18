@@ -277,6 +277,7 @@
   <ItemGroup>
     <ClInclude Include="src\core\Application.hpp" />
     <ClInclude Include="src\core\ResourceManager.hpp" />
+    <ClInclude Include="src\SceneType.hpp" />
     <ClInclude Include="src\scene\GameScene.hpp" />
     <ClInclude Include="src\scene\MainMenuScene.hpp" />
     <ClInclude Include="src\sudoku\Cell.hpp" />

@@ -5,6 +5,7 @@
 
 #include <memory>
 
+enum class SceneType;
 
 class Application : public Singleton<Application>
 {
@@ -14,6 +15,8 @@ public:
     void Initialise();
     void Run();
     void Exit();
+
+    void ChangeScene(SceneType sceneType);
 
 private:
     void Update();

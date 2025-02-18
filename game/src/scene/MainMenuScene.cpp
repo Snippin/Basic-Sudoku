@@ -1,8 +1,10 @@
 #include "MainMenuScene.hpp"
 
 #include "core/ResourceManager.hpp"
+#include "core/Application.hpp"
 #include "core/raygui.h"
 #include "raylib.h"
+#include "SceneType.hpp"
 
 #include <cstdio>
 
@@ -28,5 +30,6 @@ void MainMenuScene::Render()
         button_size.y }, "Play"))
     {
         printf("Clicked play button");
+        Application::Get()->ChangeScene(SceneType::Game);
     }
 }
