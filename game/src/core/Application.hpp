@@ -1,10 +1,10 @@
 #pragma once
 
 #include "template/SingletonTemplate.hpp"
+#include "template/Scene.hpp"
 
 #include <memory>
 
-class Scene;
 
 class Application : public Singleton<Application>
 {

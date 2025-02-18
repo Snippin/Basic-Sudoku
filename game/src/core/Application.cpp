@@ -1,5 +1,6 @@
 #include "Application.hpp"
 
+#include "scene/MainMenuScene.hpp"
 #include "scene/GameScene.hpp"
 #include "ResourceManager.hpp"
 
@@ -28,7 +29,7 @@ void Application::Initialise()
 
 void Application::Run()
 {
-    scene = std::make_unique<GameScene>();
+    scene = std::make_unique<MainMenuScene>();
     scene->Enter();
 
     while (!WindowShouldClose() && !exit_app)

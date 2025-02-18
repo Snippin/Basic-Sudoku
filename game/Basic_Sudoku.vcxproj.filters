@@ -36,6 +36,9 @@
     <ClCompile Include="src\scene\GameScene.cpp">
       <Filter>scene</Filter>
     </ClCompile>
+    <ClCompile Include="src\scene\MainMenuScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Application.hpp">
@@ -60,6 +63,9 @@
       <Filter>template</Filter>
     </ClInclude>
     <ClInclude Include="src\scene\GameScene.hpp">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scene\MainMenuScene.hpp">
       <Filter>scene</Filter>
     </ClInclude>
   </ItemGroup>
