@@ -8,6 +8,35 @@
 #include <cstdio>
 #include <cstdlib>
 #include <ctime>
+#include <algorithm>
+
+#pragma region Static Functions
+#if _DEBUG
+static void PrintGridInConsole(int grid[9][9])
+{
+
+    for (int row = 0; row < 9; row++)
+    {
+        std::for_each(std::begin(grid[row]), std::end(grid[row]), [](int num)
+        {
+            if (num == 0)
+            {
+                printf(".");
+            }
+            else
+            {
+                printf("%d", num);
+            }
+
+            printf("|");
+        });
+
+        printf("\n");
+    }
+}
+#endif
+#pragma endregion
+
 
 GameScene::GameScene() :
     difficulty_level{ DifficultyLevel::MEDIUM }, display_grid{},
@@ -237,42 +266,10 @@ void GameScene::StartGame()
 
 #if _DEBUG
     printf("\nGRID\n");
-    for (int i = 0; i < 9; i++)
-    {
-        for (int j = 0; j < 9; j++)
-        {
-            if (display_grid[i][j] == 0)
-            {
-                printf(".");
-            }
-            else
-            {
-                printf("%d", display_grid[i][j]);
-            }
-
-            printf("|");
-        }
-        printf("\n");
-    }
+    PrintGridInConsole(display_grid);
 
     printf("\nSOLUTION\n");
-    for (int i = 0; i < 9; i++)
-    {
-        for (int j = 0; j < 9; j++)
-        {
-            if (solution_grid[i][j] == 0)
-            {
-                printf(".");
-            }
-            else
-            {
-                printf("%d", solution_grid[i][j]);
-            }
-
-            printf("|");
-        }
-        printf("\n");
-    }
+    PrintGridInConsole(solution_grid);
 
     printf("empty spaces: %d\n", remaining_space);
 #endif
