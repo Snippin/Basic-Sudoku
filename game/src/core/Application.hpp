@@ -16,6 +16,7 @@ public:
     void Run();
     void Exit();
 
+    void Quit();
     void ChangeScene(SceneType sceneType);
 
 private:

@@ -53,6 +53,11 @@ void Application::Exit()
     CloseWindow();
 }
 
+void Application::Quit()
+{
+    exit_app = true;
+}
+
 void Application::ChangeScene(SceneType sceneType)
 {
     if (scene != nullptr)
