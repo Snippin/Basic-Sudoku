@@ -2,6 +2,8 @@
 
 #include "template/SingletonTemplate.hpp"
 
+#include <memory>
+
 class Scene;
 
 class Application : public Singleton<Application>
@@ -23,5 +25,5 @@ private:
     int screen_width;
     int screen_height;
     bool exit_app;
-    Scene *scene;
+    std::unique_ptr<Scene> scene;
 };

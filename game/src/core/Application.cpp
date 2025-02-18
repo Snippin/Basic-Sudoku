@@ -7,6 +7,8 @@
 #include "raygui.h"
 #include "raylib.h"
 
+#include <memory>
+
 void Application::Initialise()
 {
     screen_width = 1000;
@@ -26,7 +28,7 @@ void Application::Initialise()
 
 void Application::Run()
 {
-    scene = new GameScene();
+    scene = std::make_unique<GameScene>();
     scene->Enter();
 
     while (!WindowShouldClose() && !exit_app)
@@ -41,7 +43,6 @@ void Application::Exit()
     if (scene != nullptr)
     {
         scene->Exit();
-        delete scene;
     }
 
     ResourceManager::Get()->UnloadResources();
