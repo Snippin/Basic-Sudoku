@@ -1,5 +1,7 @@
 #include "SudokuGenerator.hpp"
 
+#include "DifficultyLevel.hpp"
+
 #include <algorithm>
 #include <cstdlib>
 

@@ -258,7 +258,8 @@ void GameScene::StartGame()
     note_placing_mode = false;
     game_over= false;
 
-    generator.GeneratePuzzle(display_grid, solution_grid, difficulty_level);
+    generator.GeneratePuzzle(display_grid, solution_grid,
+        ResourceManager::Get()->GetDifficulty());
     for (int y = 0; y < 9; y++)
     {
         for (int x = 0; x < 9; x++)
