@@ -23,8 +23,8 @@ private:
     void Update();
     void Render();
 
-    int screen_width;
-    int screen_height;
-    bool exit_app;
+    int screen_width = 0;
+    int screen_height= 0;
+    bool exit_app = false;
     std::unique_ptr<Scene> scene;
 };
