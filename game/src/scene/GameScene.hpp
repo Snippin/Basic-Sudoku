@@ -24,7 +24,7 @@ private:
     void SelectCell(int x, int y);
     void SetCellNumber(int number);
     void HighlightRowCol(bool highlight);
-    void CheckBoard(int initial_number, int input_number);
+    void CheckEndState(int initial_number, int input_number);
     void EndGame();
 
     SudokuGenerator generator;
@@ -38,11 +38,12 @@ private:
     int selected_y;
     bool note_placing_mode;
 
-    // win conditions
+    // Game over conditions
     int remaining_space;
     bool game_over;
+    int incorrect_guess_left;
 
-    // stats
+    // Stats
     float timer;
     int wrong_inputs;
 };

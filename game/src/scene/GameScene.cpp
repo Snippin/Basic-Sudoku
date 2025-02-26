@@ -44,8 +44,8 @@ static void PrintGridInConsole(int grid[9][9])
 GameScene::GameScene() :
     difficulty_level{ DifficultyLevel::MEDIUM }, display_grid{},
     solution_grid{}, cells{}, regions{}, selected_x{ -1 }, selected_y{ -1 },
-    note_placing_mode{}, remaining_space{ 0 }, game_over{}, timer{ 0 },
-    wrong_inputs{ 0 }
+    note_placing_mode{}, remaining_space{ 0 }, game_over{},
+    incorrect_guess_left{ 0 }, timer{0}, wrong_inputs{ 0 }
 {
 
 }
@@ -66,7 +66,7 @@ void GameScene::Update()
 
     // Handle inputs
     {
-        if (IsKeyPressed((KEY_L)))
+        if (IsKeyPressed(KEY_L))
         {
             EndGame();
         }
@@ -138,11 +138,18 @@ void GameScene::Render()
         font_size * 0.5f };
     DrawTextEx(font, text, text_pos, font_size, text_spacing, WHITE);
 
+    // Incorrect guesses remaining
+    text = TextFormat("Lives: %d", incorrect_guess_left);
+    text_size = MeasureTextEx(font, text, font_size, text_spacing);
+    text_pos = { static_cast<float>(screen_width) - (text_size.x * 1.5f),
+    screen_half.y - font_size };
+    DrawTextEx(font, text, text_pos, font_size, text_spacing, GREEN);
+
     // Wrong inputs
     text = TextFormat("Errors: %d", wrong_inputs);
     text_size = MeasureTextEx(font, text, font_size, text_spacing);
     text_pos = { static_cast<float>(screen_width) - (text_size.x * 1.5f),
-    screen_half.y - (font_size * 0.5f) };
+    screen_half.y + font_size };
     DrawTextEx(font, text, text_pos, font_size, text_spacing, RED);
 
     // Exit button
@@ -255,11 +262,27 @@ void GameScene::StartGame()
 {
     timer = 0;
     wrong_inputs = 0;
+    remaining_space = 0;
     note_placing_mode = false;
     game_over= false;
 
-    generator.GeneratePuzzle(display_grid, solution_grid,
-        ResourceManager::Get()->GetDifficulty());
+    DifficultyLevel difficulty = ResourceManager::Get()->GetDifficulty();
+    switch (difficulty)
+    {
+    case DifficultyLevel::EASY:
+        incorrect_guess_left = 5;
+        break;
+
+    case DifficultyLevel::MEDIUM:
+        incorrect_guess_left = 4;
+        break;
+
+    case DifficultyLevel::HARD:
+        incorrect_guess_left = 3;
+        break;
+    }
+
+    generator.GeneratePuzzle(display_grid, solution_grid, difficulty);
     for (int y = 0; y < 9; y++)
     {
         for (int x = 0; x < 9; x++)
@@ -320,7 +343,7 @@ void GameScene::SetCellNumber(int number)
         cells[selected_y][selected_x].
             ValidateNumber(solution_grid[selected_y][selected_x]);
 
-        CheckBoard(initial_number, number);
+        CheckEndState(initial_number, number);
     }
 }
 
@@ -333,19 +356,21 @@ void GameScene::HighlightRowCol(bool highlight)
     }
 }
 
-void GameScene::CheckBoard(int initial_number, int input_number)
+void GameScene::CheckEndState(int initial_number, int input_number)
 {
     if (cells[selected_y][selected_x].IsCorrect())
     {
         remaining_space--;
-        if (remaining_space == 0)
-        {
-            EndGame();
-        }
     }
     else if (input_number != initial_number && input_number != 0)
     {
         wrong_inputs++;
+        incorrect_guess_left--;
+    }
+
+    if (remaining_space == 0 || incorrect_guess_left <= 0)
+    {
+        EndGame();
     }
 }
 
