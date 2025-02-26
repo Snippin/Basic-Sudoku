@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 template <typename T>
 class Singleton
 {
@@ -8,20 +10,19 @@ class Singleton
 public:
     static T *Get()
     {
-        if (instance == nullptr)
+        if (!instance)
         {
-            instance = new T();
+            instance = std::make_unique<T>();
         }
 
-        return instance;
+        return instance.get();
     }
 
     static void Destroy()
     {
         if (instance)
         {
-            delete instance;
-            instance = nullptr;
+            instance.reset();
         }
     }
 
@@ -29,8 +30,8 @@ private:
     Singleton() = default;
     ~Singleton() = default;
 
-    static T *instance;
+    static std::unique_ptr<T> instance;
 };
 
 template <typename T>
-T *Singleton<T>::instance = nullptr;
+std::unique_ptr<T> Singleton<T>::instance = nullptr;
