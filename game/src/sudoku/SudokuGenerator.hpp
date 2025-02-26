@@ -16,15 +16,15 @@ private:
 
     void RemoveNumbers(int grid[9][9], DifficultyLevel difficulty);
     void CountSolutions(int grid[9][9], int &solutions);
-    bool FindUnassignedLocation(int grid[9][9], int &row, int &col);
-    bool IsSafe(int grid[9][9], int row, int col, int num);
-    bool UsedInRow(int grid[9][9], int row, int num);
-    bool UsedInCol(int grid[9][9], int col, int num);
+    bool FindUnassignedLocation(int grid[9][9], int &row, int &col) const;
+    bool IsSafe(int grid[9][9], int row, int col, int num) const;
+    bool UsedInRow(int grid[9][9], int row, int num) const;
+    bool UsedInCol(int grid[9][9], int col, int num) const;
     bool UsedInBox(int grid[9][9], int box_start_row, int box_start_col,
-        int num);
+        int num) const;
 
     void CreateSeed(int display_grid[9][9], int solution_grid[9][9]);
-    void FillEmptyDiagonalBox(int grid[9][9], int index);
+    void FillEmptyDiagonalBox(int grid[9][9], int index) const;
     bool SolveGrid(int grid[9][9]);
 
     int guess_number[9];

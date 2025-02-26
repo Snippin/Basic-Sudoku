@@ -3,18 +3,26 @@
 #include "DifficultyLevel.hpp"
 
 #include <algorithm>
-#include <cstdlib>
+#include <random>
 
 constexpr int UNASSIGNED = 0;
 
 static int GenerateRandomNumber(int max)
 {
-    return rand() % max;
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+
+    std::uniform_int_distribution dist(0, max - 1);
+    return dist(gen);
 }
 
 static int GetRandomNumber(int min, int max)
 {
-    return rand() % max + min;
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+
+    std::uniform_int_distribution dist(min, max);
+    return dist(gen);
 }
 
 SudokuGenerator::SudokuGenerator() :
@@ -33,7 +41,7 @@ void SudokuGenerator::GeneratePuzzle(int display_grid[9][9],
 
 void SudokuGenerator::Randomize(int grid[9][9])
 {
-    // randomly shuffle the guessing number array
+    // Randomly shuffle the guessing number array
     for (int i = 0; i < 9; i++)
     {
         guess_number[i] = i + 1;
@@ -41,7 +49,7 @@ void SudokuGenerator::Randomize(int grid[9][9])
     std::_Random_shuffle1(guess_number, guess_number + 9,
         GenerateRandomNumber);
 
-    // initialise the grid
+    // Initialise the grid
     for (int y = 0; y < 9; y++)
     {
         for (int x = 0; x < 9; x++)
@@ -51,7 +59,8 @@ void SudokuGenerator::Randomize(int grid[9][9])
     }
 }
 
-void SudokuGenerator::RemoveNumbers(int grid[9][9], DifficultyLevel difficulty)
+void SudokuGenerator::RemoveNumbers(int grid[9][9],
+    DifficultyLevel difficulty)
 {
     int count = 81;
 
@@ -78,7 +87,7 @@ void SudokuGenerator::RemoveNumbers(int grid[9][9], DifficultyLevel difficulty)
         int row = GenerateRandomNumber(9);
         int col = GenerateRandomNumber(9);
 
-        // extract coordinates
+        // Extract coordinates
         if (grid[row][col] != 0)
         {
             int temp = grid[row][col];
@@ -100,7 +109,8 @@ void SudokuGenerator::RemoveNumbers(int grid[9][9], DifficultyLevel difficulty)
 
 void SudokuGenerator::CountSolutions(int grid[9][9], int &solutions)
 {
-    int row, col;
+    int row;
+    int col;
 
     if (!FindUnassignedLocation(grid, row, col))
     {
@@ -121,7 +131,7 @@ void SudokuGenerator::CountSolutions(int grid[9][9], int &solutions)
 }
 
 bool SudokuGenerator::FindUnassignedLocation(int grid[9][9], int &row,
-    int &col)
+    int &col) const
 {
     for (row = 0; row < 9; row++)
     {
@@ -137,26 +147,21 @@ bool SudokuGenerator::FindUnassignedLocation(int grid[9][9], int &row,
     return false;
 }
 
-bool SudokuGenerator::IsSafe(int grid[9][9], int row, int col, int num)
+bool SudokuGenerator::IsSafe(int grid[9][9], int row, int col, int num) const
 {
     return (!UsedInRow(grid, row, num) && !UsedInCol(grid, col, num) &&
         !UsedInBox(grid, row - row % 3, col - col % 3, num));
 }
 
-bool SudokuGenerator::UsedInRow(int grid[9][9], int row, int num)
+bool SudokuGenerator::UsedInRow(int grid[9][9], int row, int num) const
 {
-    for (int col = 0; col < 9; col++)
+    return std::any_of(std::begin(grid[row]), std::end(grid[row]), [&](int cell)
     {
-        if (grid[row][col] == num)
-        {
-            return true;
-        }
-    }
-
-    return false;
+        return cell == num;
+    });
 }
 
-bool SudokuGenerator::UsedInCol(int grid[9][9], int col, int num)
+bool SudokuGenerator::UsedInCol(int grid[9][9], int col, int num) const
 {
     for (int row = 0; row < 9; row++)
     {
@@ -170,7 +175,7 @@ bool SudokuGenerator::UsedInCol(int grid[9][9], int col, int num)
 }
 
 bool SudokuGenerator::UsedInBox(int grid[9][9], int box_start_row,
-    int box_start_col, int num)
+    int box_start_col, int num) const
 {
     for (int row = 0; row < 3; row++)
     {
@@ -195,7 +200,7 @@ void SudokuGenerator::CreateSeed(int display_grid[9][9],
 
     SolveGrid(display_grid);
 
-    // save solution
+    // Save solution
     for (int i = 0; i < 9; i++)
     {
         for (int j = 0; j < 9; j++)
@@ -205,7 +210,7 @@ void SudokuGenerator::CreateSeed(int display_grid[9][9],
     }
 }
 
-void SudokuGenerator::FillEmptyDiagonalBox(int grid[9][9], int index)
+void SudokuGenerator::FillEmptyDiagonalBox(int grid[9][9], int index) const
 {
     int start = index * 3;
     std::_Random_shuffle1(guess_number, guess_number + 9,
@@ -221,27 +226,31 @@ void SudokuGenerator::FillEmptyDiagonalBox(int grid[9][9], int index)
 
 bool SudokuGenerator::SolveGrid(int grid[9][9])
 {
-    int row, col;
+    int row;
+    int col;
 
-    // if there is no unassigned location, return
+    // If there is no unassigned location, return
     if (!FindUnassignedLocation(grid, row, col))
-        return true; // success
+    {
+        // Success
+        return true;
+    }
 
-    // consider digits 1 to 9
+    // Consider digits 1 to 9
     if (std::any_of(std::begin(guess_number), std::end(guess_number),
         [&](int num)
         {
-            // if it looks promising
+            // If it looks promising
             if (IsSafe(grid, row, col, num))
             {
-                // make tentative assignment
+                // Make tentative assignment
                 grid[row][col] = num;
 
-                // if success, return
+                // If success, return
                 if (SolveGrid(grid))
                     return true;
 
-                // failure, unmake & try again
+                // Failure, unmake & try again
                 grid[row][col] = UNASSIGNED;
             }
 
