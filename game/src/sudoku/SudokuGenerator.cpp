@@ -7,21 +7,12 @@
 
 constexpr int UNASSIGNED = 0;
 
-static int GenerateRandomNumber(int max)
+static int GetRandomNumber(int max, int min = 0)
 {
     static std::random_device rd;
     static std::mt19937 gen(rd());
 
-    std::uniform_int_distribution dist(0, max - 1);
-    return dist(gen);
-}
-
-static int GetRandomNumber(int min, int max)
-{
-    static std::random_device rd;
-    static std::mt19937 gen(rd());
-
-    std::uniform_int_distribution dist(min, max);
+    std::uniform_int_distribution dist(min, max - 1);
     return dist(gen);
 }
 
@@ -46,8 +37,10 @@ void SudokuGenerator::Randomize(int grid[9][9])
     {
         guess_number[i] = i + 1;
     }
-    std::_Random_shuffle1(guess_number, guess_number + 9,
-        GenerateRandomNumber);
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::shuffle(guess_number.begin(), guess_number.end(), gen);
 
     // Initialise the grid
     for (int y = 0; y < 9; y++)
@@ -84,8 +77,8 @@ void SudokuGenerator::RemoveNumbers(int grid[9][9],
 
     while (count > 0)
     {
-        int row = GenerateRandomNumber(9);
-        int col = GenerateRandomNumber(9);
+        int row = GetRandomNumber(9);
+        int col = GetRandomNumber(9);
 
         // Extract coordinates
         if (grid[row][col] != 0)
@@ -213,8 +206,7 @@ void SudokuGenerator::CreateSeed(int display_grid[9][9],
 void SudokuGenerator::FillEmptyDiagonalBox(int grid[9][9], int index) const
 {
     int start = index * 3;
-    std::_Random_shuffle1(guess_number, guess_number + 9,
-        GenerateRandomNumber);
+
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)

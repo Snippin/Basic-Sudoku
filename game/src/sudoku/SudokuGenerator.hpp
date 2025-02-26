@@ -2,6 +2,8 @@
 
 #include "DifficultyLevel.hpp"
 
+#include <array>
+
 class SudokuGenerator
 {
 public:
@@ -27,5 +29,5 @@ private:
     void FillEmptyDiagonalBox(int grid[9][9], int index) const;
     bool SolveGrid(int grid[9][9]);
 
-    int guess_number[9];
+    std::array<int, 9> guess_number;
 };
