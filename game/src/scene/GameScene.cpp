@@ -9,8 +9,6 @@
 #include "SceneType.hpp"
 
 #include <cstdio>
-#include <cstdlib>
-#include <ctime>
 #include <algorithm>
 
 #pragma region Static Functions
@@ -52,7 +50,6 @@ GameScene::GameScene() :
 
 void GameScene::Enter()
 {
-    srand(static_cast<unsigned>(time(nullptr)));
     InitialiseGridPositions();
     StartGame();
 }
